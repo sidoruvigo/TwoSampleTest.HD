@@ -25,7 +25,7 @@
 #'
 #' @return
 #' \itemize{
-#' \item{‘Equaldis.TStest.HD’}
+#' \item{‘TwoSampleTest.HD’}
 #' }
 #'
 #' @author

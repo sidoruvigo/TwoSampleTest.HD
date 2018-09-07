@@ -8,7 +8,7 @@
 \title{A two-sample test for the equality of distributions for high-dimensional data}
 \value{
 \itemize{
-\item{‘Equaldis.TStest.HD’}
+\item{‘TwoSampleTest.HD’}
 }
 }
 \description{
