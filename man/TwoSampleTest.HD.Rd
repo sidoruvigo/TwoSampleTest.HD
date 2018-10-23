@@ -34,47 +34,50 @@ A list containing the following components:
 \item{data.name: }{a character string giving the name of the data.}
 }
 \description{
-Performs the four tests of equality of the p marginal distributions for two groups proposed in Cousido-
-Rocha et al. (2018). The methods have been designed for the low sample size and high dimensional
-setting. Furthermore, the possibility that the p variables in each data set can be weakly dependent is
-considered. The function also reports a set of p permutation p-values, each of them is derived from testing
-the equality of distributions in the two groups for each of the variables separately. These p-values are
-useful when the proposed tests rejects the global null hypothesis since it is possible to identify which
-variables have been contributed to this significance.
+Performs the four tests of equality of the p marginal distributions
+ for two groups proposed in Cousido- Rocha et al.(2018). The methods have been
+ designed for the low sample size and high dimensional setting. Furthermore,
+ the possibility that the p variables in each data set can be weakly dependent is considered.
+ The function also reports a set of p permutation p-values, each of which is derived
+ from testing the equality of distributions in the two groups for each of the variables
+ separately. These p-values are useful when a proposed test rejects the global null
+ hypothesis since it makes it possible to identify which variables have contributed to this significance.
 }
 \details{
 The function implements the two-sample tests proposed by Cousido-Rocha, et al. (2018).
-The methods “spect”,“boot” and “us” are based on a global statistic which is the average of p individual statistics
-corresponding to each of the p variables. Each of these individual statistics measure the difference
-between the empirical characteristic functions computed from the two samples. An alternative expression
-of them show that it can be interpreted as a difference between the variability in each of the two samples
-and the variability in the combined sample. The global statistic (average) is standarized using different
-variance estimators given place to the three different methods. The method “spect” uses a variance
-estimator based on the spectral analysis theory, the method “boot” implements the block bootstrap to
-estimate the variance and the method “us” employs a variance estimator derived from U-statistic theory
-(more details in Cousido-Rocha et al., 2018). The methods “spect” and “boot” are suitable under
-some theoretical assumptions which include that the sequence of individual statistics that defined the
-global statistic is strictly stationary whereas the method “us” avoids such assumption. However the
-methods “spect” and “boot” have been checked in simulations and they perform well even when such
-assumption is violated. The methods “spect” and “us” have their corresponding version for independent
-data (“spect ind” and “us ind”), for which the variance estimator is simplified taking into acount the
-independence of the variables.
-The asymptotic normality (when p tends to infinity) of the standardized version of the statistic is used
-to compute the corresponding p-value. On the other hand, Cousido-Rocha et al. (2018) also proposed
-the method “perm” whose global statistic is the average of the permutation p-values corresponding to
-the individual statistics mentioned above. This method assumes that the sequence of p-values is strictly
-stationary, however in simulations it seems that it performs well where this assumption does not hold.
-Furthermore than defining a new global test these p-values can be also used when the global null hypothesis
-is rejected and we need to identify which of the p variables have been contributed to that rejection.
-The global statistic depends on a parameter which plays a similar role of a smoothing parameter
-or bandwidth in kernel density estimation. For the four global tests this parameter is estimated using
-the information of all the variables or features. For the individual statistics on based of which the
-permutation p-values are computed, we have two possibilities: (a) use the value employed in the global
-test (b I.permutation.p.values=“global”). (b) estimate this parameter for each variable independently
-using only its sample information (b I.permutation.p.values=“individual”).
+ The methods “spect”, “boot” and “us” are based on a global statistic which is the average of p
+ individual statistics corresponding to each of the p variables. Each of these individual statistics measures the difference between
+ the empirical characteristic functions computed from the two samples.
+ An alternative expression shows that each statistic is essentially the intergrated
+ squared difference between kernel density estimates. The global statistic (average) is
+ standardized using one of three different variance estimators. The method “spect”
+ uses a variance estimator based on spectral analysis, the method “boot” implements
+ the block bootstrap to estimate the variance and the method “us” employs a variance estimator
+ derived from U-statistic theory (more details in Cousido-Rocha et al., 2018).
+ The methods “spect” and “boot” are suitable under some assumptions including that the
+ sequence of individual statistics that define the global statistic is strictly stationary,
+ whereas the method “us” avoids this assumption. However the methods “spect” and “boot”
+ have been checked in simulations and they perform well even when the stationarity assumption
+ is violated. The methods “spect” and “us” have their corresponding versions for independent
+ data (“spect ind” and “us ind”), for which the variance estimators are simplified taking into
+ acount the independence of the variables. The asymptotic normality (when p tends to infinity)
+ of the standardized version of the statistic is used to compute the corresponding p-value.
+ On the other hand, Cousido-Rocha et al. (2018) also proposed the method “perm” whose global
+ statistic is the average of the permutation p-values corresponding to the individual statistics
+ mentioned above. This method assumes that the sequence of p-values is strictly stationary,
+ however in simulations it seems that it performs well when this assumption does not hold.
+ In addition to providing an alternative global test, these p-values can be used when the
+ global null hypothesis is rejected and one wishes to identify which of the p variables have
+ contributed to that rejection. The global statistic depends on a parameter which plays
+ a role similar to that of a smoothing parameter or bandwidth in kernel density estimation.
+ For the four global tests this parameter is estimated using the information from all the variables or features.
+ For the four global tests this parameter is estimated using
+the information of all the variables or features. For the individual statistics from which the permutation
+p-values are computed, there are two possibilities: (i) use the value employed in the global test
+(b_I.permutation.p.values=“global”), (ii) estimate this parameter for each variable
+separately using only its sample information (b_I.permutation.p.values=“individual”)).
 }
 \examples{
-
 \dontshow{
 # Example
 ### Data set to check the performance of the code
@@ -148,9 +151,11 @@ for (j in 1:p){
   }
  }
 
-# Our interest is to test the null hypotheses that the distribution of each of the 1000 variables
+# Our interest is to test the null hypothesis that the distribution of each of the 1000 variables
 # is the same in the two groups.
+
 # We use for this purpose the four methods proposed in Cousido-Rocha et al. (2018).
+
 res1 <- TwoSampleTest.HD(X, Y, method = "spect")
 res1
 res2 <- TwoSampleTest.HD(X, Y, method = "boot")
@@ -159,14 +164,16 @@ res3 <- TwoSampleTest.HD(X, Y, method = "us")
 res3
 res4 <- TwoSampleTest.HD(X, Y, method = "perm")
 res4
-# The four methods reject the global null hypotheses.
+# The four methods reject the global null hypothesis.
 # Hence, we use the individual permutation p-values
 # to identify which variables are not equally distributed in the two groups.
 pv<-res4$I.permutation.p.values
+
 # Applying a multiple testing procedure to these p-values
 # we can detect the variables with different distributions for the two groups.
 # The following plot of the individual permutation p-values is also informative.
 # We remark in red the 100 smallest p-values.
+
 pv_sort <- sort(pv)
 cri <- pv_sort[100]
 ind <- which(pv <= cri)
@@ -176,7 +183,9 @@ points(ind, pv[ind], col = "red")
 }
 }
 \references{
-Cousido-Rocha, M., de Uña-Álvarez J., and Hart, J. (2018). A two-sample test for the equality of distributions for high-dimensional data. Preprint.
+Cousido-Rocha, M., de Uña-Álvarez J., and Hart, J. (2018).
+ A two-sample test for the equality of marginal distributions for high-dimensional data.
+ Preprint.
 }
 \author{
 \itemize{
