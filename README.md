@@ -6,8 +6,8 @@
 ```r
 devtools::install_github('sidoruvigo/TwoSampleTest.HD')
 ```
-[![Downloads](http://cranlogs.r-pkg.org/badges/TwoSampleTest.HD)](https://cran.r-project.org/package=TwoSampleTest.HD
- [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/TwoSampleTest.HD)](https://cran.r-project.org/package=TwoSampleTest.HD
+[![Downloads](http://cranlogs.r-pkg.org/badges/TwoSampleTest.HD)](https://cran.r-project.org/package=TwoSampleTest.HD)
+ [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/TwoSampleTest.HD)](https://cran.r-project.org/package=TwoSampleTest.HD)
 
 This package implements four different tests proposed in Cousido-Rocha et al. (2018). These methods test the (global) null hypotheses of equality of the univariate marginals of the p-variate distributions in the two populations. In other words, the null hypotheses is an intersection of the p null hypotheses corresponding to p different two-sample problems. These methods are particularly well suited to the low sample size, high dimensional setting (n << p). The sample size can be as small as 2. The test accounts for the possibility that the p variables in each data set can be weakly dependent. Three of the methods arise from different approaches to estimate the variance of the same statistic. This statistic averages p individual statistics based on comparing the empirical characteristic functions computed from the two samples. The last method is an alternative global test whose statistic averages the p-values derived from applying permutation tests to the individual statistics mentioned above. When the global null hypotheses is rejected such permutation p-values can also be used to identify which variables contribute to this significance. The standarized version of each test statistic and its p-value are computed among other things.
 
