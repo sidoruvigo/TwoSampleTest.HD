@@ -71,11 +71,10 @@ The function implements the two-sample tests proposed by Cousido-Rocha, et al. (
  contributed to that rejection. The global statistic depends on a parameter which plays
  a role similar to that of a smoothing parameter or bandwidth in kernel density estimation.
  For the four global tests this parameter is estimated using the information from all the variables or features.
- For the four global tests this parameter is estimated using
-the information of all the variables or features. For the individual statistics from which the permutation
-p-values are computed, there are two possibilities: (i) use the value employed in the global test
-(b_I.permutation.p.values=“global”), (ii) estimate this parameter for each variable
-separately using only its sample information (b_I.permutation.p.values=“individual”)).
+ For the individual statistics from which the permutation
+ p-values are computed, there are two possibilities: (i) use the value employed in the global test
+ (b_I.permutation.p.values=“global”), (ii) estimate this parameter for each variable
+ separately using only its sample information (b_I.permutation.p.values=“individual”)).
 }
 \examples{
 \dontshow{
